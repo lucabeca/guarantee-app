@@ -1,7 +1,5 @@
 import axios from 'axios';
-
 const host = 'http://localhost:3001/api'
-
 async function get(url = '', data={}) {
     try {
         const response = await axios.get(`${host}${url}`, {
@@ -24,7 +22,6 @@ async function post(url = '', data = {}) {
     }
 }
 
-
 async function put(url = '', data = {}) {
     try {
         const response = await axios.put(`${host}${url}`, data);
@@ -34,7 +31,6 @@ async function put(url = '', data = {}) {
         throw error;
     }
 }
-
 
 async function del(url = '', data = {}) {
     try {
