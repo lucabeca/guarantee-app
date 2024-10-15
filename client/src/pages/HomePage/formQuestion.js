@@ -1,14 +1,9 @@
 import { Button, Card, CardBody, CardHeader, Container, Row, Col, Form, FormGroup, Input, Label, Collapse } from 'reactstrap';
 import Select from 'react-select';
 
-const dificuldadeOptions = [
-	{ value: '1', label: 'Fácil' },
-	{ value: '2', label: 'Médio' },
-	{ value: '3', label: 'Difícil' },
-];
-
 export default function FormQuestion({
 	anosProvasOptions,
+	dificuldadeOptions,
 	modalidadeOptions,
 	nivelOptions,
 	categoriaOptions,

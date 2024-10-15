@@ -12,7 +12,9 @@ app.get('/', (req, res) => {
 });
 
 const questoesRouter = require('./routes/questoes');
+const emailRouter = require('./routes/email');
 app.use('/api', questoesRouter);
+app.use('/email', emailRouter);
 
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);

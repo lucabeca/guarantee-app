@@ -14,17 +14,7 @@ function HomePage() {
   const [subcategoriaOptions, setSubcategoriaOptions] = useState([]);
   const [topicoOptions, setTopicoOptions] = useState([]);
   const [faseOptions, setFaseOptions] = useState([]);
-
-  const [selectedAnoProva, setSelectedAnoProva] = useState([]);
-  const [selectedModalidade, setSelectedModalidade] = useState([]);
-  const [selectedNivel, setSelectedNivel] = useState([]);
-  const [selectedDificuldade, setSelectedDificuldade] = useState([]);
-  const [selectedFase, setSelectedFase] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedSubCategories, setSelectedSubCategories] = useState([]);
-  const [selectedTopics, setSelectedTopics] = useState([]);
-  const [valorTitulo, setValorTitulo] = useState([]);
-  const [valorEnunciado, setValorEnunciado] = useState([]);
+  const [dificuldadeOptions, setDificuldadeOptions] = useState([]);
 
   const [filtros, setFiltros] = useState({
     selectedAnoProva: [],
@@ -71,6 +61,7 @@ function HomePage() {
       get("/nivel"),
       get("/categoria"),
       get("/fase"),
+      get("/dificuldade"),
     ])
       .then(
         ([
@@ -79,12 +70,14 @@ function HomePage() {
           dataNivel,
           dataCategoria,
           dataFase,
+          dataDificuldade,
         ]) => {
           setCategoriaOptions(dataCategoria);
           setAnosProvasOptions(dataAnoProva);
           setModalidadeOptions(dataModalidade);
           setNivelOptions(dataNivel);
           setFaseOptions(dataFase);
+          setDificuldadeOptions(dataDificuldade);
           setLoading(false);
         }
       )
@@ -133,6 +126,7 @@ function HomePage() {
               categoriaOptions={categoriaOptions}
               subcategoriaOptions={subcategoriaOptions}
               topicoOptions={topicoOptions}
+              dificuldadeOptions={dificuldadeOptions}
               faseOptions={faseOptions}
               filtros={filtros}
               onChangeFiltro={onChangeFiltro}
