@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from '../images/logo.webp';
+import logo from '../images/logo.png';
 
 function NavBar() {
     return (
@@ -13,7 +13,7 @@ function NavBar() {
                         className="me-2"
                         style={{ width: '80px', height: 'auto' }} 
                     />
-                    <span>OBI Explorer</span>
+                    <span>Volantes L.A</span>
                 </Link>
                 <button
                     className="navbar-toggler"
@@ -32,7 +32,7 @@ function NavBar() {
                             <NavLink exact className="nav-link" to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/about">Sobre nós</NavLink>
+                            <NavLink className="nav-link" to="/about">Ajuda</NavLink>
                         </li>
                     </ul>
                 </div>

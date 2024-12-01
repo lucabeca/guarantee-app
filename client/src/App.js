@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import QuestaoPage from './components/QuestaoPage';
 import About from './pages/About';
 import { Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
+import AdmPage from './pages/AdmPage';
 
 const Layout = () => {
   return (
@@ -25,8 +25,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/questao/:id" element={<QuestaoPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/admin" element={<AdmPage />} />
         </Route>
       </Routes>
     </Router>

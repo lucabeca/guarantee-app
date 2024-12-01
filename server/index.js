@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.send('API funcionando!');
 });
 
-const questoesRouter = require('./routes/questoes');
+const questoesRouter = require('./routes/consultas');
 const emailRouter = require('./routes/email');
 app.use('/api', questoesRouter);
 app.use('/email', emailRouter);

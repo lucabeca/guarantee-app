@@ -1,194 +1,77 @@
-import { Button, Card, CardBody, CardHeader, Container, Row, Col, Form, FormGroup, Input, Label, Collapse } from 'reactstrap';
-import Select from 'react-select';
+import React, { useState } from 'react';
+import { Card, CardBody, Input, Button, Col, Row } from 'reactstrap';
 
-export default function FormQuestion({
-	anosProvasOptions,
-	dificuldadeOptions,
-	modalidadeOptions,
-	nivelOptions,
-	categoriaOptions,
-	subcategoriaOptions,
-	topicoOptions,
-	faseOptions,
-	filtros,
-	onChangeFiltro,
-	searchQuestions,
-	clearFilters
-}) {
-	return (
-		<Col lg={{ size: 8, offset: 2 }} md={{ size: 10, offset: 1 }} sm="12">
-			<Card>
-				<CardHeader>Buscar questões</CardHeader>
-				<CardBody>
-					<Form>
-						<Row>
-							<Col md="12">
-								<FormGroup>
-									<Label for="titulo">Título</Label>
-									<Input
-										value={filtros.valorTitulo}
-										onChange={(event) => {
-											onChangeFiltro('valorTitulo', event.target.value);
-										}}
-										placeholder="Digite o título"
-										id="titulo"
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<Row>
-							<Col md="12">
-								<FormGroup>
-									<Label for="enunciado">Enunciado</Label>
-									<Input
-										value={filtros.valorEnunciado}
-										placeholder="Digite o enunciado"
-										id="enunciado"
-										onChange={(event) => {
-											onChangeFiltro('valorEnunciado', event.target.value);
-										}}
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<Row>
-							<Col md="6">
-								<FormGroup>
-									<Label for="ano">Ano da prova</Label>
-									<Select 
-										onChange={(vl) => {
-											onChangeFiltro('selectedAnoProva', vl.map(({ value }) => value));
-										}} 
-										isMulti 
-										placeholder="Selecione..." 
-										options={anosProvasOptions} 
-										id="anoprova"
-										value={anosProvasOptions.filter(({value}) => (filtros?.selectedAnoProva ?? [])?.includes(value))}
-									/>
-								</FormGroup>
-							</Col>
-							<Col md="6">
-								<FormGroup>
-									<Label for="nivel">Nível</Label>
-									<Select 
-										onChange={(vl) => {
-											onChangeFiltro('selectedNivel', vl.map(({ value }) => value));
-										}} 
-										value={nivelOptions.filter(({value}) => (filtros?.selectedNivel ?? [])?.includes(value))}
-										isMulti
-										placeholder="Selecione..."
-										options={nivelOptions}
-										id="nivel"
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<Row>
-							<Col md="6">
-								<FormGroup>
-									<Label for="modalidade">Modalidade</Label>
-									<Select
-										onChange={(vl) => {
-											onChangeFiltro('selectedModalidade', vl.map(({ value }) => value));
-										}} 
-										isMulti
-										placeholder="Selecione..." 
-										options={modalidadeOptions} 
-										id="modalidade"
-										value={modalidadeOptions.filter(({value}) => (filtros?.selectedModalidade ?? [])?.includes(value))
-									}
-									/>
-								</FormGroup>
-							</Col>
-							<Col md="6">
-								<FormGroup>
-									<Label for="fase">Fase</Label>
-									<Select 
-										onChange={(vl) => {
-											onChangeFiltro('selectedFase', vl.map(({ value }) => value));
-										}}
-										value={faseOptions.filter(({value}) => (filtros?.selectedFase ?? [])?.includes(value))} 
-										isMulti 
-										placeholder="Selecione..." 
-										options={faseOptions} 
-										id="fase" 
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<Row>
-							<Col md="6">
-								<FormGroup>
-									<Label for="categoria">Categoria</Label>
-									<Select 
-										onChange={(vl) => {
-											onChangeFiltro('selectedCategories', vl.map(({ value }) => value));
-										}}
-										value={categoriaOptions.filter(({value}) => (filtros?.selectedCategories ?? [])?.includes(value))}
-										isMulti
-										placeholder="Selecione..." 
-										options={categoriaOptions}
-										id="categoria"
-									/>
-								</FormGroup>
-							</Col>
-							<Col md="6">
-								<FormGroup>
-									<Label for="subcategoria">Subcategoria</Label>
-									<Select 
-										onChange={(vl) => {
-											onChangeFiltro('selectedSubCategories', vl.map(({ value }) => value))
-										}}
-										value={subcategoriaOptions.filter(({value}) => (filtros?.selectedSubCategories ?? [])?.includes(value))}
-										isMulti
-										placeholder="Selecione..."
-										options={subcategoriaOptions}
-										id="subcategoria"
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<Row>
-							<Col md="6">
-								<FormGroup>
-									<Label for="topico">Tópico</Label>
-									<Select 
-										onChange={(vl) => {
-											onChangeFiltro('selectedTopics', vl.map(({ value }) => value));
-										}}
-										value={topicoOptions.filter(({value}) => (filtros?.selectedTopics ?? [])?.includes(value))}
-										isMulti
-										placeholder="Selecione..."
-										options={topicoOptions}
-										id="topico"
-									/>
-								</FormGroup>
-							</Col>
-							<Col md="6">
-								<FormGroup>
-									<Label for="dificuldade">Dificuldade</Label>
-									<Select 
-										onChange={(vl) => {
-											onChangeFiltro('selectedDificuldade', vl.map(({ value }) => value));
-										}} 
-										isMulti
-										value={dificuldadeOptions.filter(({value}) => (filtros?.selectedDificuldade ?? [])?.includes(value))}
-										placeholder="Selecione..." 
-										options={dificuldadeOptions} 
-										id="dificuldade" 
-									/>
-								</FormGroup>
-							</Col>
-						</Row>
-						<Row>
-							<Col md="12" className="text-center">
-								<Button color="success" onClick={() => searchQuestions()} className="mr-2">Buscar questões</Button>
-								<Button color="danger" onClick={() => clearFilters()}>Limpar filtro</Button>
-							</Col>
-						</Row>
-					</Form>
-				</CardBody>
-			</Card>
-		</Col>
-	)
+export default function ConsultaManifestacao() {
+  const [codigo, setCodigo] = useState('');
+  const [consulta, setConsulta] = useState(null); // Armazena os resultados da consulta
+  const [erro, setErro] = useState('');
+
+  const handleConsultar = async () => {
+    if (codigo.trim()) {
+      try {
+        // Simulação de chamada ao backend
+        const response = await fetch(`/api/consulta/${codigo}`); // Substitua pela URL real
+        if (!response.ok) throw new Error('Código não encontrado.');
+        
+        const data = await response.json();
+        setConsulta(data);
+        setErro(''); // Limpa mensagens de erro
+      } catch (err) {
+        setErro(err.message);
+        setConsulta(null); // Limpa os resultados anteriores
+      }
+    } else {
+      setErro('Por favor, insira um código.');
+      setConsulta(null); // Limpa os resultados anteriores
+    }
+  };
+
+  return (
+    <div className="mt-3">
+      <Col md={{ size: 8, offset: 2 }}>
+        <Card>
+          <CardBody className="text-center">
+            <p>Insira o código e acompanhe sua manifestação</p>
+            <div className="d-flex justify-content-center align-items-center gap-3">
+              <Input
+                type="text"
+                value={codigo}
+                onChange={(e) => setCodigo(e.target.value)}
+                placeholder="Digite o código"
+                style={{ maxWidth: '70%' }}
+              />
+              <Button color="primary" onClick={handleConsultar}>
+                Consultar
+              </Button>
+            </div>
+
+            {erro && (
+              <div className="mt-3 text-danger">
+                <strong>{erro}</strong>
+              </div>
+            )}
+
+            {consulta && (
+              <Card className="mt-4">
+                <CardBody>
+                  <h5 className="text-center">Resultado da Consulta</h5>
+                  <Row>
+                    <Col md="12">
+                      <p><strong>Data de Lançamento:</strong> {consulta.data_lancamento}</p>
+                    </Col>
+                    <Col md="12">
+                      <p><strong>Descrição:</strong> {consulta.descricao}</p>
+                    </Col>
+                    <Col md="12">
+                      <p><strong>Status:</strong> {consulta.status}</p>
+                    </Col>
+                  </Row>
+                </CardBody>
+              </Card>
+            )}
+          </CardBody>
+        </Card>
+      </Col>
+    </div>
+  );
 }

@@ -1,83 +1,33 @@
 import React from 'react';
-import '../css/about.css';
-import ContactForm from '../components/Contact';
 
-function About() {
+function Help() {
   return (
     <>
       <div className="container my-5">
         <div className="row">
           <div className="col-12">
-            <h1 className="text-center mb-4">Sobre Nós</h1>
+            <h1 className="text-center mb-4">Ajuda</h1>
+            <h5 className="text-center text-muted">Encontre informações úteis sobre o sistema</h5>
           </div>
         </div>
 
         <div className="row">
           <div className="col-md-6">
             <div className="card shadow-sm border-0">
-              <div className="card-body">
+              <div className="card-body text-center">
+                <h5 className="card-title">Sobre Nós</h5>
                 <p className="card-text">
-                  Esse sistema surgiu como um projeto de estágio. Somos uma equipe liderada por Luciana Guedes, professora
-                  no curso de TADS na UDESC. Nosso objetivo do estágio foi desenvolver uma aplicação web completa para o Programa
-                  de Extensão OBI (Olimpíada Brasileira de Informática).
+                  A Volantes L.A surgiu em 2020 e, desde então, se tornou referência no comércio de simuladores novos e usados. Buscamos excelência no atendimento e manutenção dos produtos.
                 </p>
               </div>
             </div>
           </div>
           <div className="col-md-6">
             <div className="card shadow-sm border-0">
-              <div className="card-body">
+              <div className="card-body text-center">
+                <h5 className="card-title">Garantia</h5>
                 <p className="card-text">
-                  O projeto envolve o desenvolvimento de uma plataforma que permite aos usuários explorar questões das edições
-                  passadas da Olimpíada Brasileira de Informática, com filtros por categorias, níveis e tipos de soluções. A justificativa de execução
-                  é a não existência atual de um sistema de filtragem.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="row justify-content-center mt-5">
-          <div className="col-md-4">
-            <div className="card shadow-sm border-0">
-              <div className="card-body">
-                <h5 className="card-title text-center">Supervisor</h5>
-                <p className="card-text">
-                  Prof. Rui Jorge Tramontin Junior
-                  <br />
-                  Departamento de Ciência da Computação
-                  <br />
-                  <a href="mailto:rui.tramontin@udesc.br">rui.tramontin@udesc.br</a>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div className="card shadow-sm border-0">
-              <div className="card-body">
-                <h5 className="card-title text-center">Orientadora</h5>
-                <p className="card-text">
-                  Profa. Luciana Rita Guedes
-                  <br />
-                  Departamento de Ciência da Computação
-                  <br />
-                  <a href="mailto:luciana.guedes@udesc.br">luciana.guedes@udesc.br</a>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div className="card shadow-sm border-0">
-              <div className="card-body">
-                <h5 className="card-title text-center">Estagiário</h5>
-                <p className="card-text">
-                  Lucas Augusto de Oliveira
-                  <br />
-                  Curso: TADS, UDESC
-                  <br />
-                  <a href="mailto:lucas.17aac16@gmail.com">lucas.17aac16@gmail.com</a>
+                  Para registrar solicitações de garantia, é necessário informar dados como email, data de compra, número de série e descrever o problema. Lembrando que volantes novos têm garantia diretamente com a Logitech.
                 </p>
               </div>
             </div>
@@ -85,44 +35,54 @@ function About() {
         </div>
 
         <div className="row mt-5">
-          <div className="col-md-4">
+          <div className="col-md-6">
             <div className="card shadow-sm border-0">
-              <div className="card-body">
-                <h5 className="card-title text-center">OBI</h5>
+              <div className="card-body text-center">
+                <h5 className="card-title">Prazos</h5>
                 <p className="card-text">
-                  A Olimpíada Brasileira de Informática (OBI) é uma competição acadêmica que visa incentivar o aprendizado de programação e algoritmos entre estudantes do ensino fundamental, médio e universitário.
+                  Os prazos para análise e resposta das solicitações podem variar de 1 a 3 dias úteis, dependendo da complexidade do caso. Entraremos em contato diretamente pelo email e telefone cadastrados.
                 </p>
               </div>
             </div>
           </div>
-
-          <div className="col-md-4">
+          <div className="col-md-6">
             <div className="card shadow-sm border-0">
-              <div className="card-body">
-                <h5 className="card-title text-center">GPIE</h5>
+              <div className="card-body text-center">
+                <h5 className="card-title">Dúvidas</h5>
                 <p className="card-text">
-                  O Grupo de Pesquisa em Informática na Educação (GPIE) da UDESC é um grupo de estudos voltado para a integração entre tecnologia e processos educativos.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-4">
-            <div className="card shadow-sm border-0">
-              <div className="card-body">
-                <h5 className="card-title text-center">LINE</h5>
-                <p className="card-text">
-                  O Laboratório de Informática na Educação (LINE) é uma extensão do GPIE, focado na pesquisa e desenvolvimento de novas ferramentas e práticas pedagógicas na área de Ciência da Computação.
+                  Caso tenha dúvidas sobre o sistema, garantias ou prazos, entre em contato conosco através do WhatsApp de suporte ou utilize a seção de perguntas frequentes disponível em nossas redes sociais.
                 </p>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <ContactForm />
+        <div className="row mt-5 justify-content-center">
+          <div className="col-md-6 text-center">
+            <h5 className="mb-3">Entre em Contato</h5>
+            <div>
+              <a
+                href="https://wa.me/47984935956"
+                className="btn btn-success me-3"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp
+              </a>
+              <a
+                href="https://www.instagram.com/volantes_la"
+                className="btn btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
 
-export default About;
+export default Help;
