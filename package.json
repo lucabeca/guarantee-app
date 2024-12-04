@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "boostrap": "^2.0.0",
     "date-fns": "^4.1.0",
+    "react-bootstrap": "^2.10.6",
     "react-select": "^5.8.1"
   }
 }

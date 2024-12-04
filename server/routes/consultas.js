@@ -69,6 +69,53 @@ router.get('/consulta/:codigo', async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ error: 'Erro ao consultar manifestação.' });
+// Atualizar Cliente
+router.put('/clientes/:id', async (req, res) => {
+  const { id } = req.params;
+  const { nome, telefone, email } = req.body; // Dados que você quer atualizar
+
+  try {
+    const result = await pool.query(
+      `UPDATE cliente
+       SET nome = $1, telefone = $2, email = $3
+       WHERE id = $4
+       RETURNING *`,
+      [nome, telefone, email, id]
+    );
+
+    if (result.rows.length > 0) {
+      res.json(result.rows[0]); // Retorna o cliente atualizado
+    } else {
+      res.status(404).json({ error: 'Cliente não encontrado' });
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Erro ao atualizar cliente' });
+  }
+});
+
+// Atualizar Solicitação
+router.put('/solicitacoes/:id', async (req, res) => {
+  const { id } = req.params;
+  const { produto, descricao, status } = req.body; // Dados que você quer atualizar
+
+  try {
+    const result = await pool.query(
+      `UPDATE solicitacao
+       SET produto = $1, descricao = $2, status = $3
+       WHERE id = $4
+       RETURNING *`,
+      [produto, descricao, status, id]
+    );
+
+    if (result.rows.length > 0) {
+      res.json(result.rows[0]); // Retorna a solicitação atualizada
+    } else {
+      res.status(404).json({ error: 'Solicitação não encontrada' });
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Erro ao atualizar solicitação' });
   }
 });
 
