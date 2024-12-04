@@ -42,5 +42,34 @@ router.get('/clientes', async (req, res) => {
   }
 });
 
+router.get('/consulta/:codigo', async (req, res) => {
+  const { codigo } = req.params; // Obtém o parâmetro da URL
+
+  try {
+    // Consulta dinâmica ao banco de dados
+    const query = await pool.query(
+      `
+      SELECT 
+        id AS codigo, 
+        data_compra AS data_lancamento, 
+        descricao, 
+        status 
+      FROM solicitacao
+      WHERE id = $1
+      `,
+      [codigo]
+    );
+
+    // Verifica se o registro foi encontrado
+    if (query.rows.length === 0) {
+      return res.status(404).json({ error: 'Manifestação não encontrada.' });
+    }
+
+    res.json(query.rows[0]); // Retorna o primeiro registro encontrado
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Erro ao consultar manifestação.' });
+  }
+});
 
 module.exports = router;

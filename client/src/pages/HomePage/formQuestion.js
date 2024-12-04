@@ -1,28 +1,27 @@
 import React, { useState } from 'react';
 import { Card, CardBody, Input, Button, Col, Row } from 'reactstrap';
+import axios from 'axios';
+import {formatarData} from '../../utils/formatarData';
 
 export default function ConsultaManifestacao() {
   const [codigo, setCodigo] = useState('');
-  const [consulta, setConsulta] = useState(null); // Armazena os resultados da consulta
+  const [consulta, setConsulta] = useState(null);
   const [erro, setErro] = useState('');
 
   const handleConsultar = async () => {
-    if (codigo.trim()) {
-      try {
-        // Simulação de chamada ao backend
-        const response = await fetch(`/api/consulta/${codigo}`); // Substitua pela URL real
-        if (!response.ok) throw new Error('Código não encontrado.');
-        
-        const data = await response.json();
-        setConsulta(data);
-        setErro(''); // Limpa mensagens de erro
-      } catch (err) {
-        setErro(err.message);
-        setConsulta(null); // Limpa os resultados anteriores
-      }
-    } else {
+    if (!codigo.trim()) {
       setErro('Por favor, insira um código.');
-      setConsulta(null); // Limpa os resultados anteriores
+      setConsulta(null);
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:3001/api/consulta/${codigo}`);
+      setConsulta(response.data);
+      setErro('');
+    } catch (err) {
+      setErro(err.response?.data?.error || 'Erro ao consultar o código.');
+      setConsulta(null);
     }
   };
 
@@ -57,7 +56,7 @@ export default function ConsultaManifestacao() {
                   <h5 className="text-center">Resultado da Consulta</h5>
                   <Row>
                     <Col md="12">
-                      <p><strong>Data de Lançamento:</strong> {consulta.data_lancamento}</p>
+                      <p><strong>Data de Lançamento:</strong> {formatarData(consulta.data_lancamento)}</p>
                     </Col>
                     <Col md="12">
                       <p><strong>Descrição:</strong> {consulta.descricao}</p>
