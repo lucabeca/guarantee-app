@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, CardBody, Input, Button, Col, Row } from 'reactstrap';
+import axios from 'axios';
 
 export default function RegistroGarantia() {
     const [formData, setFormData] = useState({
@@ -10,6 +11,9 @@ export default function RegistroGarantia() {
         descricao: '',
     });
 
+    const [mensagem, setMensagem] = useState('');
+    const [erro, setErro] = useState('');
+
     const handleInputChange = (field, value) => {
         setFormData({
             ...formData,
@@ -17,15 +21,27 @@ export default function RegistroGarantia() {
         });
     };
 
-    const handleRegistro = () => {
-        const { email, dataCompra, produto, descricao } = formData;
-        if (!email || !dataCompra || !produto || !descricao) {
-            alert('Por favor, preencha todos os campos obrigatórios (*) antes de enviar.');
+    const handleRegistro = async () => {
+        const { email, dataCompra, serial, produto, descricao } = formData;
+    
+        if (!email || !dataCompra || !serial || !produto || !descricao) {
+            setErro('Todos os campos obrigatórios devem ser preenchidos.');
             return;
         }
-        alert(`Registro de garantia enviado com sucesso!\nDetalhes: ${JSON.stringify(formData, null, 2)}`);
+    
+        try {
+            const response = await axios.post('http://localhost:3001/api/solicitacoes', formData);
+            setMensagem(
+                `Registro realizado com sucesso! Código de consulta: ${response.data.codigoConsulta}`
+            );
+            setErro('');
+            setFormData({ email: '', dataCompra: '', serial: '', produto: '', descricao: '' }); // Limpa o formulário
+        } catch (err) {
+            setErro(err.response?.data?.error || 'Erro ao registrar garantia.');
+            setMensagem('');
+        }
     };
-
+    
     return (
         <div className="mt-3">
             <Col md={{ size: 8, offset: 2 }}>
@@ -72,7 +88,7 @@ export default function RegistroGarantia() {
                                 </Col>
                                 <Col md="6">
                                     <Input
-                                        type="text"
+                                        type="textarea"
                                         placeholder="Descrição"
                                         value={formData.descricao}
                                         onChange={(e) => handleInputChange('descricao', e.target.value)}
@@ -83,6 +99,9 @@ export default function RegistroGarantia() {
                                 Registrar
                             </Button>
                         </div>
+
+                        {mensagem && <p className="mt-3 text-success">{mensagem}</p>}
+                        {erro && <p className="mt-3 text-danger">{erro}</p>}
                     </CardBody>
                 </Card>
             </Col>
